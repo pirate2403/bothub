@@ -1,0 +1,15 @@
+@mixin breakpoint($size) {
+  @if $size == var(----breakpoint-desktop) {
+    @media (min-width: var(----breakpoint-desktop)) {
+      @content;
+    }
+  } @else if $size == var(--breakpoint-tablet) {
+    @media (max-width: var(----breakpoint-desktop)) and (min-width: var(--breakpoint-tablet)) {
+      @content;
+    }
+  } @else if $size == var(--breakpoint-tablet) {
+    @media (max-width: var(--breakpoint-tablet)) {
+      @content;
+    }
+  }
+}

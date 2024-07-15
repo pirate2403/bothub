@@ -1,0 +1,23 @@
+.header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 20px;
+  background: var(--color-gray-4-40);
+  border-bottom: 1px solid var(--color-gray-3);
+  backdrop-filter: blur(9px);
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 1290px;
+    width: 100%;
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+  }
+}

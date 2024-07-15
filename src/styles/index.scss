@@ -1,0 +1,15 @@
+@import url('./breakpoints.scss');
+@import url('./colors.scss');
+@import url('./fonts.scss');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-black);
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--color-white);
+}
