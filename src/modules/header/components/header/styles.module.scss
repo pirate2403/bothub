@@ -1,14 +1,20 @@
+@use "@/styles/mixins/breakpoint.scss" as *;
+
 .header {
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   width: 100%;
-  padding: 20px;
+  padding: 20px 40px;
   background: var(--color-gray-4-40);
   border-bottom: 1px solid var(--color-gray-3);
   backdrop-filter: blur(9px);
+
+  @include breakpoint(mobile) {
+    padding: 16px;
+    height: var(--header-mobile-height);
+  }
 
   &__content {
     display: flex;
@@ -19,5 +25,40 @@
     flex: none;
     order: 0;
     flex-grow: 1;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+
+    &_left {
+      gap: 24px;
+      width: 1043px;
+      height: 29px;
+      order: 0;
+      flex-grow: 1;
+
+      @include breakpoint(desktop) {
+        height: 34px;
+      }
+    }
+
+    &_right {
+      gap: 34px;
+      min-width: 233px;
+      height: 40px;
+      flex: none;
+      order: 1;
+      flex-grow: 0;
+
+      @include breakpoint(tablet) {
+        min-width: 302px;
+      }
+
+      @include breakpoint(mobile) {
+        gap: 24px;
+        min-width: 127px;
+      }
+    }
   }
 }
