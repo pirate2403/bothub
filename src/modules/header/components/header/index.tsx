@@ -14,19 +14,21 @@ interface Props {
 
 export const Header: FC<Props> = ({ navbar, language, authUser }) => {
   const breakpoint = useBreakpoint();
+  const isDesktop = breakpoint === BREAKPOINT_NAME.DESKTOP;
+  const isMobile = breakpoint === BREAKPOINT_NAME.MOBILE;
 
   return (
     <header className={styles.header}>
       <div className={styles.header__content}>
         <div className={cn(styles.header__block, styles.header__block_left)}>
           <Logo />
-          {breakpoint === BREAKPOINT_NAME.DESKTOP && <Divider />}
-          {breakpoint === BREAKPOINT_NAME.DESKTOP && navbar}
+          {isDesktop && <Divider />}
+          {isDesktop && navbar}
         </div>
         <div className={cn(styles.header__block, styles.header__block_right)}>
           {language}
-          {breakpoint !== BREAKPOINT_NAME.MOBILE && authUser}
-          {breakpoint !== BREAKPOINT_NAME.DESKTOP && navbar}
+          {!isMobile && authUser}
+          {!isDesktop && navbar}
         </div>
       </div>
     </header>
