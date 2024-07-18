@@ -1,15 +1,26 @@
 @use "@/styles/mixins/breakpoint.scss" as *;
 
 .header {
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
   width: 100%;
+  height: var(--header-height);
   padding: 20px 40px;
-  background: var(--color-gray-4-40);
-  border-bottom: 1px solid var(--color-gray-3);
-  backdrop-filter: blur(9px);
+  z-index: var(--header-index);
+
+  &:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-gray-4-40);
+    border-bottom: 1px solid var(--color-gray-3);
+    backdrop-filter: blur(9px);
+    z-index: -1;
+  }
 
   @include breakpoint(mobile) {
     padding: 16px;

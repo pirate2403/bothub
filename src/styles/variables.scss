@@ -1,4 +1,18 @@
+@use "./mixins/_breakpoint.scss" as *;
+
 :root {
-  --header-height: 62px;
-  --header--mobile-height: 54px;
+  --header-height: 80px;
+  --header-index: 100;
+}
+
+@include breakpoint(tablet) {
+  :root {
+    --header-height: 80px;
+  }
+}
+
+@include breakpoint(mobile) {
+  :root {
+    --header-height: 70px;
+  }
 }
