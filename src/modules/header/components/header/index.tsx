@@ -19,13 +19,13 @@ export const Header: FC<Props> = ({ navbar, language, authUser }) => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__content}>
-        <div className={cn(styles.header__block, styles.header__block_left)}>
+      <div className={styles.content}>
+        <div className={cn(styles.block, styles.block_left)}>
           <Logo />
           {isDesktop && <Divider />}
           {isDesktop && navbar}
         </div>
-        <div className={cn(styles.header__block, styles.header__block_right)}>
+        <div className={cn(styles.block, styles.block_right)}>
           {language}
           {!isMobile && authUser}
           {!isDesktop && navbar}
