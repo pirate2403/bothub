@@ -1,4 +1,5 @@
 @use "@/styles/mixins/_breakpoint.scss" as *;
+@use '@/styles/mixins/_typography.scss' as *;
 
 .navigation {
   position: relative;
@@ -17,7 +18,7 @@
     left: 0;
     right: 0;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: calc(var(--header-height) + 42px) 40px 42px;
     height: unset;
     gap: 42px;
@@ -30,10 +31,31 @@
       transform: translateY(0);
     }
   }
+
+
+  @include breakpoint_down(tablet) {
+    padding: calc(var(--header-height) + 42px) 16px 30px;
+    gap: 30px;
+  }
 }
 
 .button {
   @include breakpoint(desktop) {
     display: none;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-radius: 10px;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  @include text-m-semibold;
+
+  &:hover {
+    color: var(--color-primary);
   }
 }

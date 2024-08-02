@@ -1,4 +1,5 @@
 @use '@/styles/mixins/_typography.scss' as *;
+@use '@/styles/mixins/_breakpoint.scss' as *;
 
 .dropdown {
   position: relative;
@@ -21,8 +22,10 @@
 
   @include text-m-semibold;
 
-  &:hover {
-    color: var(--color-primary);
+  @include breakpoint(descktop) {
+    &:hover {
+      color: var(--color-primary);
+    }
   }
 
   &_open {
@@ -47,7 +50,6 @@
   box-shadow: 0 4px 8px var(--color-black-10);
   background: var(--color-gray-3);
   border: 1px solid var(--color-gray-2);
-  padding: 16px 20px;
   border-radius: 8px;
   transition: all 0.3s ease;
 

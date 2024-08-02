@@ -54,3 +54,20 @@
     line-height: 18px;
   }
 }
+
+@mixin text-xs-regular {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+
+
+  @include breakpoint(tablet) {
+    font-size: 10px;
+  }
+
+  @include breakpoint(mobile) {
+    font-size: 10px;
+  }
+}

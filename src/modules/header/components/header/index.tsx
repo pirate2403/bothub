@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import Logo from '@/assets/logo/main-logo.svg?react';
 import { BREAKPOINT_NAME } from '@/constants/breakpoint';
@@ -21,7 +22,9 @@ export const Header: FC<Props> = ({ navbar, language, authUser }) => {
     <header className={styles.header}>
       <div className={styles.content}>
         <div className={cn(styles.block, styles.block_left)}>
-          <Logo />
+          <NavLink to={'/'}>
+            <Logo />
+          </NavLink>
           {isDesktop && <Divider />}
           {isDesktop && navbar}
         </div>

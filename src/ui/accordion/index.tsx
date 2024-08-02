@@ -19,35 +19,45 @@ const ICON = {
 interface Props {
   kind?: 'primary' | 'secondary';
   title: ReactNode;
+  open?: boolean;
+  onClick?: (open: boolean) => void;
 }
 
 export const Accordion: FC<PropsWithChildren<Props>> = ({
   kind = 'primary',
   title,
+  open,
+  onClick,
   children,
 }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(!!open);
+  const isOpen = open || isExpanded;
 
   const handleButtonClick = () => {
-    setIsExpanded(!isExpanded);
+    if (!onClick && !open) {
+      setIsExpanded(!isOpen);
+    }
+    onClick?.(!isOpen);
   };
 
   const height = contentRef.current?.scrollHeight ?? 0;
-  const style = isExpanded ? { gridTemplateRows: `auto ${height}px` } : {};
+  const style = isOpen ? { gridTemplateRows: `auto ${height + 14}px` } : {};
 
   return (
     <div
       style={style}
       className={cn(styles.accordion, styles[kind], {
-        [styles[`${kind}_expanded`]]: isExpanded,
+        [styles[`${kind}_expanded`]]: isOpen,
       })}
       onClick={handleButtonClick}
     >
       <div className={styles.title}>
         {title}
         {createElement(ICON[kind], {
-          className: cn(styles.icon, { [styles.icon_rotate]: isExpanded }),
+          className: cn(styles.icon, {
+            [styles.icon_rotate]: isOpen,
+          }),
         })}
       </div>
       <div

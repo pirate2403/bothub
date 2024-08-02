@@ -1,4 +1,11 @@
-import { FC, PropsWithChildren, ReactNode, useState } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import cn from 'classnames';
 import ArrowDown from '@/assets/icons/arrow-down.svg?react';
 import styles from './styles.module.scss';
@@ -6,7 +13,9 @@ import styles from './styles.module.scss';
 interface Props {
   title: ReactNode;
   className?: string;
-  position: 'left' | 'right' | 'center';
+  position?: 'left' | 'right' | 'center';
+  open?: boolean;
+  onClick?: (open: boolean) => void;
 }
 
 export const Dropdown: FC<PropsWithChildren<Props>> = ({
@@ -14,18 +23,43 @@ export const Dropdown: FC<PropsWithChildren<Props>> = ({
   children,
   className,
   position = 'center',
+  open,
+  onClick,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isOpen = open || isExpanded;
 
-  const handleButtonClick = () => {
-    setIsOpen(!isOpen);
+  const handleButtonClick = (value: boolean) => {
+    if (!onClick && !open) setIsExpanded(value);
+    onClick?.(value);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      handleButtonClick(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className={cn(styles.dropdown, className)}>
+    <div ref={dropdownRef} className={cn(styles.dropdown, className)}>
       <button
         className={cn(styles.trigger, { [styles.trigger_open]: isOpen })}
-        onClick={handleButtonClick}
+        onClick={handleButtonClick.bind(null, !isOpen)}
       >
         {title}
         <ArrowDown />
